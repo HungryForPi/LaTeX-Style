@@ -66,7 +66,8 @@
 	\newcommand{\mararesp}{\par\medskip\noindent Team Name: \rule{4cm}{0.15mm} \hfill Answer: \rule{4cm}{0.15mm}\\
 		
 		\noindent\dotfill\\}
-\else\ifguts %tested
+\else
+\ifguts %tested
 	\newcounter{problem}
 	\setcounter{problem}{0}
 	\newenvironment{problem}[1][\intcalcMul{\thepset+2}{2}]{\refstepcounter{problem}\par\medskip
@@ -78,6 +79,18 @@
 	\textit{\noindent Write your answers directly next to the corresponding questions.} \rmfamily}
 	{\gutsresp}
 
-	\newcommand{\gutsresp}{\par\bigskip\noindent Team Name: \rule{6cm}{0.15mm}\\
-	
-		\noindent\dotfill\\}
+	\newcommand{\gutsresp}{\par\bigskip\noindent Team Name: \rule{6cm}{0.15mm}\\\\
+	\noindent\dotfill\\}
+\else
+\ifsolutions
+	\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+	\newenvironment{ans}{\medskip\par\noindent\textbf{Answer.} \rmfamily}{}
+
+	\newcounter{problem}
+	\setcounter{problem}{0}
+	\newenvironment{problem}{\refstepcounter{problem}\medskip\par
+		\noindent \textbf{Problem~\theproblem.} \rmfamily}{}
+
+\fi
+\fi
+\fi
