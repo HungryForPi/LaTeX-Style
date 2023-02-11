@@ -3,10 +3,12 @@
 \newif\ifmarathon
 \newif\ifguts
 \newif\ifsolutions
+\newif\ifrelay
 
 \DeclareOption{marathon}{\marathontrue}
 \DeclareOption{guts}{\gutstrue}
 \DeclareOption{solutions}{\solutionstrue}
+\DeclareOption{relay}{\relaytrue}
 
 \ProcessOptions\relax
 
@@ -90,7 +92,22 @@
 	\setcounter{problem}{0}
 	\newenvironment{problem}{\refstepcounter{problem}\medskip\par
 		\noindent \textbf{Problem~\theproblem.} \rmfamily}{}
-
+\else
+\ifrelay
+	\newcounter{round}
+	\setcounter{round}{0}
+	\newenvironment{round}{\refstepcounter{round}\section*{Round \theround}
+	
+	\noindent\dotfill\\}{}
+	\newcounter{problem}
+	\@addtoreset{problem}{round}
+	\setcounter{problem}{0}
+	\newenvironment{problem}{\refstepcounter{problem}\medskip\par
+		\noindent \textbf{Problem~\theround.\theproblem.} \rmfamily}
+	{\medskip\\
+		
+		\noindent\dotfill\\}
+\fi
 \fi
 \fi
 \fi
